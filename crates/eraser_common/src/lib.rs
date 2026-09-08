@@ -1,25 +1,28 @@
-//! ForenX Secure Eraser — shared/common crate scaffold.
+//! ForenX Secure Eraser — shared/common crate.
 //!
-//! STATUS: Placeholder only. No audit logging, SHA-256 hashing helpers,
-//! SQLite/RocksDB storage adapters, or shared IPC DTOs have been
-//! implemented yet.
+//! Provides reusable, non-destructive infrastructure consumed by both
+//! `drive_eraser` and `file_eraser`:
+//! - [`error`] — common error type
+//! - [`time`] — UTC timestamp representation
+//! - [`hashing`] — SHA-256 helpers
+//! - [`ipc_dto`] — shared IPC / data-transfer DTOs
+//! - [`audit_log`] — append-only, tamper-evident audit record foundation
+//! - [`storage`] — SQLite (system of record) + optional RocksDB storage
 //!
-//! This file exists solely so the workspace compiles as a valid crate
-//! boundary for future implementation work.
+//! STATUS: Step 2 (shared foundation) of the ForenX Secure Eraser
+//! implementation. No drive/file discovery, classification, capability
+//! detection, method selection, or erasure engine logic lives here or
+//! anywhere else in this workspace yet — `drive_eraser` and
+//! `file_eraser` remain unimplemented placeholders as of this step, and
+//! nothing in this crate performs any destructive operation.
 
-/// Placeholder marker confirming this crate compiles as part of the
-/// ForenX Secure Eraser workspace. Will be removed once real module
-/// code is added.
-pub fn scaffold_marker() -> &'static str {
-    "eraser_common scaffold ok"
-}
+pub mod audit_log;
+pub mod error;
+pub mod hashing;
+pub mod ipc_dto;
+pub mod storage;
+pub mod time;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn scaffold_compiles() {
-        assert_eq!(scaffold_marker(), "eraser_common scaffold ok");
-    }
-}
+pub use error::{EraserCommonError, EraserCommonResult};
+pub use hashing::Sha256Hex;
+pub use time::AuditTimestamp;
