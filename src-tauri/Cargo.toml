@@ -1,0 +1,12 @@
+[package]
+name = "forenx-eraser-tauri"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "ForenX Secure Eraser Tauri shell — scaffold only. No Tauri dependency wired up yet."
+
+[dependencies]
+
+[[bin]]
+name = "forenx-eraser-tauri"
+path = "src/main.rs"

@@ -1,0 +1,8 @@
+[package]
+name = "eraser_common"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+description = "ForenX Secure Eraser shared code (audit log, hashing, storage, DTOs) — scaffold only."
+
+[dependencies]

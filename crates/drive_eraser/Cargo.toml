@@ -1,0 +1,8 @@
+[package]
+name = "drive_eraser"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+description = "ForenX Secure Drive Eraser — scaffold only, no implementation yet."
+
+[dependencies]
