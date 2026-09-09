@@ -3,7 +3,8 @@
 //! STRICT READ-ONLY GUARANTEE:
 //! This crate performs resolution, directory crawling, filesystem feature probing,
 //! safety classification, read-only capability assessment (Step 5.1), read-only
-//! sanitization method selection (Step 5.2), and in-memory safety validation (Step 5.3).
+//! sanitization method selection (Step 5.2), in-memory safety validation (Step 5.3),
+//! and mock file sanitization simulation (Step 6.1).
 //! It does NOT delete, overwrite, truncate, write, lock volumes, dismount volumes,
 //! or invoke destructive IOCTLs.
 //!
@@ -14,6 +15,7 @@
 //! `CapabilityState::Unknown` and never guessed.
 
 pub mod capability;
+pub mod engine;
 pub mod errors;
 pub mod filesystem_probe;
 pub mod method_select;
@@ -26,6 +28,11 @@ pub mod traversal;
 
 pub use capability::{
     assess_target_capabilities, CapabilityFinding, CapabilityState, FileCapabilityAssessment,
+};
+pub use engine::{
+    FileErasureEngine, MockFileCancellationToken, MockFileErasureEngine,
+    MockFileExecutionOutcome, MockFileExecutionRequest, MockFileExecutionResult,
+    MockFileProgressEvent,
 };
 pub use errors::{EraserError, EraserResult};
 pub use filesystem_probe::FilesystemProber;
