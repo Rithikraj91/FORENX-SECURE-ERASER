@@ -2,8 +2,8 @@
 //!
 //! STRICT READ-ONLY GUARANTEE:
 //! This crate performs resolution, directory crawling, filesystem feature probing,
-//! safety classification, read-only capability assessment (Step 5.1), and read-only
-//! sanitization method selection (Step 5.2).
+//! safety classification, read-only capability assessment (Step 5.1), read-only
+//! sanitization method selection (Step 5.2), and in-memory safety validation (Step 5.3).
 //! It does NOT delete, overwrite, truncate, write, lock volumes, dismount volumes,
 //! or invoke destructive IOCTLs.
 //!
@@ -20,6 +20,7 @@ pub mod method_select;
 pub mod model;
 pub mod platform;
 pub mod safety;
+pub mod safety_validate;
 pub mod target_resolver;
 pub mod traversal;
 
@@ -35,5 +36,8 @@ pub use model::*;
 pub use platform::mock::{MockEntryConfig, MockPlatformProvider};
 pub use platform::PlatformProvider;
 pub use safety::{is_descendant_or_equal, SafetyEngine};
+pub use safety_validate::{
+    validate_sanitization_plan, SafetyValidationResult, SafetyValidationStatus,
+};
 pub use target_resolver::TargetResolver;
 pub use traversal::DirectoryCrawler;
