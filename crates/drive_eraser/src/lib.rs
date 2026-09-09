@@ -3,6 +3,7 @@
 pub mod capability;
 pub mod classify;
 pub mod discovery;
+pub mod engine;
 pub mod error;
 pub mod identity;
 pub mod method_select;
@@ -14,6 +15,10 @@ pub use capability::{
     AtaCapabilityEvidence, CapabilityEvidence, NvmeCapabilityEvidence, ScsiCapabilityEvidence,
 };
 pub use classify::classify_drive;
+pub use engine::{
+    DriveErasureEngine, MockCancellationToken, MockDriveErasureEngine, MockExecutionOutcome,
+    MockExecutionRequest, MockExecutionResult, MockProgressEvent,
+};
 pub use error::{DriveEraserError, Result};
 pub use identity::resolve_drive_identity;
 pub use method_select::{
