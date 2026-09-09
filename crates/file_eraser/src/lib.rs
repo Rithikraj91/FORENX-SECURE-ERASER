@@ -4,7 +4,7 @@
 //! This crate performs resolution, directory crawling, filesystem feature probing,
 //! safety classification, read-only capability assessment (Step 5.1), read-only
 //! sanitization method selection (Step 5.2), in-memory safety validation (Step 5.3),
-//! and mock file sanitization simulation (Step 6.1).
+//! mock file sanitization simulation (Step 6.1), and mock file verification (Step 6.2).
 //! It does NOT delete, overwrite, truncate, write, lock volumes, dismount volumes,
 //! or invoke destructive IOCTLs.
 //!
@@ -25,6 +25,7 @@ pub mod safety;
 pub mod safety_validate;
 pub mod target_resolver;
 pub mod traversal;
+pub mod verification;
 
 pub use capability::{
     assess_target_capabilities, CapabilityFinding, CapabilityState, FileCapabilityAssessment,
@@ -48,3 +49,7 @@ pub use safety_validate::{
 };
 pub use target_resolver::TargetResolver;
 pub use traversal::DirectoryCrawler;
+pub use verification::{
+    verify_mock_execution_result, verify_mock_file_erasure, MockFileVerificationRequest,
+    MockFileVerificationResult, VerificationVerdict,
+};
