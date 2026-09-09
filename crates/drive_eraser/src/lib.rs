@@ -7,6 +7,7 @@ pub mod error;
 pub mod identity;
 pub mod method_select;
 pub mod model;
+pub mod safety;
 
 pub use capability::{
     default_readonly_capabilities, evaluate_capabilities_from_evidence, evaluate_safe_capabilities,
@@ -21,4 +22,8 @@ pub use method_select::{
 pub use model::{
     BusType, DiscoveredDrive, DriveCapabilities, DriveClassification, MediaType, SafetyFlags,
     TriState,
+};
+pub use safety::{
+    validate_discovered_drive, validate_drive_safety, BlockReasonCode, SafetyAssessment,
+    SafetyFinding, SafetyVerdict,
 };
