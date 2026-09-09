@@ -1,26 +1,28 @@
-//! ForenX Secure File & Metadata Eraser — crate scaffold.
+//! ForenX Secure Eraser - Step 4: File Target Resolution & Filesystem Probing.
 //!
-//! STATUS: Placeholder only. No target resolution, filesystem probing,
-//! content-overwrite, metadata sanitization, or slack-space handling
-//! logic has been implemented yet. No destructive functionality exists
-//! in this crate.
+//! STRICT READ-ONLY GUARANTEE:
+//! This crate performs resolution, directory crawling, filesystem feature probing,
+//! and safety classification. It does NOT delete, overwrite, truncate, write,
+//! lock volumes, dismount volumes, or invoke destructive IOCTLs.
 //!
-//! This file exists solely so the workspace compiles as a valid crate
-//! boundary for future implementation work.
+//! Epistemic certainty rule:
+//! Values are marked `ProbedValue::Verified(T)` only when authoritatively confirmed
+//! by OS queries. Uncertain, unqueried, or failed probes MUST be preserved as
+//! `ProbedValue::Unavailable { reason }` and never guessed.
 
-/// Placeholder marker confirming this crate compiles as part of the
-/// ForenX Secure Eraser workspace. Will be removed once real module
-/// code is added.
-pub fn scaffold_marker() -> &'static str {
-    "file_eraser scaffold ok"
-}
+pub mod errors;
+pub mod filesystem_probe;
+pub mod model;
+pub mod platform;
+pub mod safety;
+pub mod target_resolver;
+pub mod traversal;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn scaffold_compiles() {
-        assert_eq!(scaffold_marker(), "file_eraser scaffold ok");
-    }
-}
+pub use errors::{EraserError, EraserResult};
+pub use filesystem_probe::FilesystemProber;
+pub use model::*;
+pub use platform::mock::{MockEntryConfig, MockPlatformProvider};
+pub use platform::PlatformProvider;
+pub use safety::{is_descendant_or_equal, SafetyEngine};
+pub use target_resolver::TargetResolver;
+pub use traversal::DirectoryCrawler;
