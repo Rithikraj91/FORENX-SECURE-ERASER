@@ -1,15 +1,24 @@
-//! ForenX Secure Drive Eraser.
-//!
-//! Step 3 provides read-only drive discovery, identification,
-//! classification, capability assessment, and safety metadata.
-//!
-//! No destructive drive operations are implemented in this module yet.
+//! ForenX Secure Drive Eraser crate.
 
 pub mod capability;
 pub mod classify;
 pub mod discovery;
 pub mod error;
 pub mod identity;
+pub mod method_select;
 pub mod model;
 
+pub use capability::{
+    default_readonly_capabilities, evaluate_capabilities_from_evidence, evaluate_safe_capabilities,
+    AtaCapabilityEvidence, CapabilityEvidence, NvmeCapabilityEvidence, ScsiCapabilityEvidence,
+};
+pub use classify::classify_drive;
 pub use error::{DriveEraserError, Result};
+pub use identity::resolve_drive_identity;
+pub use method_select::{
+    select_sanitization_methods, MethodCandidate, MethodProposal, SanitizationMethod,
+};
+pub use model::{
+    BusType, DiscoveredDrive, DriveCapabilities, DriveClassification, MediaType, SafetyFlags,
+    TriState,
+};
