@@ -4,6 +4,8 @@
   "version": "0.1.0",
   "identifier": "com.forenx.secure-eraser",
   "build": {
+    "beforeDevCommand": "npm.cmd --prefix ../frontend run dev -- --host 127.0.0.1",
+    "devUrl": "http://localhost:5173",
     "frontendDist": "../frontend/dist"
   },
   "app": {
