@@ -4,6 +4,7 @@ members = [
     "crates/drive_eraser",
     "crates/file_eraser",
     "crates/eraser_common",
+    "src-tauri",
 ]
 
 [workspace.package]
