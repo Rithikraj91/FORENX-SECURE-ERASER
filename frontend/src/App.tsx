@@ -14,7 +14,7 @@ function App() {
           target_device_id: 'MockDrive_Disk1',
           physical_drive_index: 1,
           classification: 'Hdd',
-          is_system: 'UnSupported',
+          is_system: 'Unsupported',
           is_boot: 'Unsupported',
           is_removable: 'Unsupported',
           is_read_only: 'Unsupported',
@@ -30,14 +30,30 @@ function App() {
     }
   }
 
+  const testFileEraser = async () => {
+    try {
+      setMessage('Running mock file erasure...')
+
+      const result = await invoke('test_mock_file_erasure')
+
+      setMessage(JSON.stringify(result, null, 2))
+    } catch (error) {
+      setMessage(`Error: ${String(error)}`)
+    }
+  }
+
   return (
     <div>
       <h1>ForenX Secure Eraser</h1>
 
-      <p>Step 7.2 — Drive Eraser Integration Test</p>
+      <p>Step 7 — Drive & File Eraser Integration Test</p>
 
       <button type="button" onClick={testDriveEraser}>
         Test Mock Drive Eraser
+      </button>
+
+      <button type="button" onClick={testFileEraser}>
+        Test Mock File Eraser
       </button>
 
       <pre>{message}</pre>

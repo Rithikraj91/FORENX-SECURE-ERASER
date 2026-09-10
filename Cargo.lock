@@ -972,6 +972,7 @@ name = "forenx-secure-eraser"
 version = "0.1.0"
 dependencies = [
  "drive_eraser",
+ "file_eraser",
  "serde",
  "serde_json",
  "tauri",
