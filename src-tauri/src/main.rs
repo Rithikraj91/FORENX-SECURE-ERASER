@@ -1,14 +1,17 @@
-// ForenX Secure Eraser — Tauri shell scaffold.
-//
-// STATUS: Placeholder only. No Tauri application, IPC command handlers,
-// or RBAC gate wiring has been implemented yet. This binary does not
-// call into drive_eraser, file_eraser, or eraser_common yet.
-//
-// Intentionally kept dependency-free at this stage — the real `tauri`
-// dependency and command modules (commands/drive_eraser_cmds.rs,
-// commands/file_eraser_cmds.rs) will be added in a later step, not
-// as part of this scaffold.
+// Prevents additional console window on Windows in release, DO NOT REMOVE!!
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
+mod commands;
+
+use commands::drive_eraser_cmds::run_mock_drive_erasure;
+use commands::file_eraser_cmds::run_mock_file_erasure;
 
 fn main() {
-    println!("ForenX Secure Eraser — Tauri shell scaffold (no implementation yet).");
+    tauri::Builder::default()
+        .invoke_handler(tauri::generate_handler![
+            run_mock_drive_erasure,
+            run_mock_file_erasure,
+        ])
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
 }
